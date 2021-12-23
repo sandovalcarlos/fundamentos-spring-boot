@@ -1,6 +1,12 @@
 package com.sandoval.fundamentos.bean;
 
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class MyBeanWithDependencyImplement implements MyBeanWithDependency{
+
+    Log LOGGER = LogFactory.getLog(MyBeanWithDependencyImplement.class);
 
     MyOperation myOperation;
 
@@ -10,9 +16,11 @@ public class MyBeanWithDependencyImplement implements MyBeanWithDependency{
 
     @Override
     public void printWithDependency() {
-        int numero = 1;
-        System.out.println(myOperation.sum(numero));
+        LOGGER.info("Hemos ingresado al metodo printWithDependency");
 
+        int numero = 1;
+        LOGGER.debug("El numero enviado como parametro a la dependencia operation es :" + numero);
+        System.out.println(myOperation.sum(numero));
         System.out.println("Hola desde la implementacion de un bean con dependencia");
     }
 }
