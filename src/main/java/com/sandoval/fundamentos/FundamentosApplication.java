@@ -53,21 +53,52 @@ public class FundamentosApplication implements CommandLineRunner {
 	}
 
 	private void getInformationJpqlFromUser() {
-		LOGGER.info("User with method findByUserEmail " + userRepository.findByUserEmail("carlos@mail.com")
+		/*LOGGER.info("User with method findByUserEmail " + userRepository.findByUserEmail("carlos@mail.com")
 				.orElseThrow(()-> new RuntimeException("User not found")));
 		userRepository.findAndSort("Diana", Sort.by("id").descending())
 				.stream()
 				.forEach(user -> LOGGER.info("User with method sort " + user));
+
+		userRepository.findByName("Carlos")
+				.forEach(user -> LOGGER.info("User with Query Method" + user));
+
+		LOGGER.info("User with Query Method findByEmailAndName " + userRepository.findByEmailAndName("gregorio@mail.com","Gregorio Sandoval")
+				.orElseThrow(()-> new RuntimeException("User not found")));
+
+		userRepository.findByNameLike("%Ca%")
+				.stream()
+				.forEach(user -> LOGGER.info("User findByNameLike " + user));
+
+		userRepository.findByEmailOrName(null, "Carlos")
+				.stream()
+				.forEach(user -> LOGGER.info("User findByNameOrEmail " + user));*/
+
+		userRepository
+				.findByBirthDateBetween(LocalDate.of(2021,9,1), LocalDate.of(2021,10,31))
+				.stream()
+				.forEach(user -> LOGGER.info("User findByBirthDateBetween " + user));
+
+		/*userRepository.findByNameLikeOrderByIdDesc("%Carlos%")
+				.stream()
+				.forEach(user -> LOGGER.info("Users with like and orderby " + user));*/
+
+		userRepository.findByNameContainingOrderByIdDesc("Carlos")
+				.stream()
+				.forEach(user -> LOGGER.info("Users with containing and orderby " + user));
+
+
 	}
 
 	private void saveUsersInDataBase() {
-		User user1 = new User("Carlos Sandoval", "carlos@mail.com", LocalDate.of(2021,10,22));
+		User user1 = new User("Carlos1", "carlos@mail.com", LocalDate.of(2021,10,22));
 		User user2 = new User("Gregorio Sandoval", "gregorio@mail.com", LocalDate.of(2021,4,9));
 		User user3 = new User("Diana Sandoval", "diana@mail.com", LocalDate.of(2021,9,21));
 		User user4 = new User("Rocio Briones", "rocio@mail.com", LocalDate.of(2021,9,5));
 		User user5 = new User("Diana Karen Sandoval", "dianakaren@mail.com", LocalDate.of(2021,9,5));
+		User user6 = new User("Carlos Martin Sandoval", "carlosmartin@mail.com", LocalDate.of(2021,10,22));
+		User user7 = new User("Carlos2", "carlos@mail.com", LocalDate.of(2021,10,22));
 
-		List<User> list = Arrays.asList(user1, user2, user3, user4, user5);
+		List<User> list = Arrays.asList(user1, user2, user3, user4, user5, user6, user7);
 		list.stream().forEach(userRepository::save);
 
 	}
