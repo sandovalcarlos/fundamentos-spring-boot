@@ -23,7 +23,8 @@ public class User {
 
     private LocalDate birthDate;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+    // Comentamos la anotacion para solucionar el error "Unsupported Media Type Application/Json"
+    // @JsonManagedReference
     private List<Post> posts = new ArrayList<>();
 
     public User() {

@@ -1,11 +1,13 @@
 package com.sandoval.fundamentos.service;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sandoval.fundamentos.entity.User;
 import com.sandoval.fundamentos.repository.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.ManyToOne;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -31,6 +33,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    // @ManyToOne
+    // @JsonBackReference
     public User save(User newUser) {
         return userRepository.save(newUser);
     }

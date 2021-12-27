@@ -1,7 +1,5 @@
 package com.sandoval.fundamentos.dto;
 
-import org.apache.tomcat.jni.Local;
-
 import java.time.LocalDate;
 
 public class UserDto {

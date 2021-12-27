@@ -6,6 +6,7 @@ import com.sandoval.fundamentos.caseuse.GetUser;
 import com.sandoval.fundamentos.caseuse.UpdateUser;
 import com.sandoval.fundamentos.entity.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,10 @@ public class UserRestController {
         return getUser.getAll();
     }
 
-    @PostMapping("/")
-    ResponseEntity<User> newUser(@RequestBody User newUser) {
+    // @PostMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    ResponseEntity<User> newUser(@RequestBody(required = false) User newUser) {
         return new ResponseEntity<>(createUser.save(newUser), HttpStatus.CREATED);
     }
 
